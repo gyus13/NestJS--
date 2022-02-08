@@ -1,6 +1,7 @@
-import {Controller, Get, Param} from '@nestjs/common';
+import {Controller, Get, HttpException, Param, UseFilters} from '@nestjs/common';
 import { AppService } from './app.service';
 import {CatsService} from "./cats/cats.service";
+import {HttpExceptionFilter} from "./http-exception.filter";
 
 @Controller()
 export class AppController {
@@ -9,7 +10,9 @@ export class AppController {
       private readonly catsService: CatsService,) {}
 
   @Get()
+  @UseFilters(HttpExceptionFilter)
   getHello(): string {
+    throw new HttpException('api broken', 401)
     return this.catsService.hiCatservice();
   }
 }
