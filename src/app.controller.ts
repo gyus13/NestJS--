@@ -1,18 +1,17 @@
-import {Controller, Get, HttpException, Param, UseFilters} from '@nestjs/common';
+import { Body, Controller, Get, Param, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { AppService } from './app.service';
-import {CatsService} from "./cats/cats.service";
-import {HttpExceptionFilter} from "./http-exception.filter";
+import { CatsService } from './cats/cats.service';
 
 @Controller()
 export class AppController {
   constructor(
-      private readonly appService: AppService,
-      private readonly catsService: CatsService,) {}
+    private readonly appService: AppService,
+    private readonly catsService: CatsService,
+  ) {}
 
   @Get()
-  @UseFilters(HttpExceptionFilter)
-  getHello(): string {
-    throw new HttpException('api broken', 401)
-    return this.catsService.hiCatservice();
+  getHello() {
+    return this.catsService.hiCatServiceProduct();
   }
 }
