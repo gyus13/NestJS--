@@ -1,23 +1,15 @@
-import {
-  Delete,
-  Param,
-  ParseIntPipe,
-  Patch,
-  UseFilters,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, UseFilters, UseInterceptors } from '@nestjs/common';
 import { Controller, Get, Post, Put } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
-import { PositiveIntPipe } from 'src/common/pipes/positiveInt.pipe';
 import { CatsService } from './cats.service';
+import { CatRequestDto } from './dto/cats.request.dto';
 
 @Controller('cats')
 @UseInterceptors(SuccessInterceptor)
 @UseFilters(HttpExceptionFilter)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
-
 
   @Get()
   getCurrentCat() {
@@ -26,8 +18,7 @@ export class CatsController {
 
   @Post()
   async signUp(@Body() body: CatRequestDto) {
-    console.log(body);
-    return 'signup';
+    return this.catsService.signUp(body)
   }
 
   @Post('login')
