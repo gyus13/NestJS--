@@ -16,7 +16,7 @@ export class CatsController {
   @ApiOperation({ summary: '현재 고양이 가져오기' })
   @Get()
   getCurrentCat() {
-    return 'current cat';
+    return ' cat';
   }
 
   @ApiResponse({
