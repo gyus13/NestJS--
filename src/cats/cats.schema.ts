@@ -36,7 +36,7 @@ export class Cat extends Document {
 
   @ApiProperty({
     example: '23810',
-    description: 'passworsd',
+    description: 'password',
     required: true,
   })
   @Prop({
