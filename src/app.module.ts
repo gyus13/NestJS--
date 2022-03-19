@@ -7,13 +7,15 @@ import { MongooseModule } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import {Cat} from "./cats/cats.schema";
 
 @Module({
   imports: [
+    CatsModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGODB_URI, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     }),
     CatsModule,
     AuthModule,
